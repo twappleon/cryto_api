@@ -30,13 +30,15 @@ type TokenTransferRequest struct {
 }
 
 // ContractDeployRequest 智能合約部署請求結構
+// PrivateKey：部署者私鑰
 // Bytecode：合約 bytecode
 // ABI：合約 ABI
 // ConstructorArgs：建構子參數
 type ContractDeployRequest struct {
-	Bytecode        string        `json:"bytecode" binding:"required"` // 合約 bytecode
-	ABI             string        `json:"abi" binding:"required"`      // 合約 ABI
-	ConstructorArgs []interface{} `json:"constructor_args"`            // 建構子參數
+	PrivateKey      string        `json:"private_key" binding:"required"` // 部署者私鑰
+	Bytecode        string        `json:"bytecode" binding:"required"`    // 合約 bytecode
+	ABI             string        `json:"abi" binding:"required"`         // 合約 ABI
+	ConstructorArgs []interface{} `json:"constructor_args"`               // 建構子參數
 }
 
 // ContractCallRequest 智能合約方法呼叫請求結構

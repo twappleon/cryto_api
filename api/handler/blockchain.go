@@ -226,11 +226,12 @@ func (h *BlockchainHandler) DeployContract(c *gin.Context) {
 		return
 	}
 
-	contractAddress, txHash, err := contractManager.DeployContract(
+	contractAddress, err := contractManager.DeployContract(
 		c.Request.Context(),
+		req.PrivateKey,
 		req.Bytecode,
 		req.ABI,
-		req.ConstructorArgs...,
+		req.ConstructorArgs,
 	)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, types.Response{
@@ -246,7 +247,6 @@ func (h *BlockchainHandler) DeployContract(c *gin.Context) {
 		Message: "Contract deployed successfully",
 		Data: types.ContractResponse{
 			ContractAddress: contractAddress,
-			TxHash:          txHash,
 		},
 	})
 }
