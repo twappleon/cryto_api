@@ -2,6 +2,9 @@ package main
 
 import (
 	"log"
+	"os"
+
+	"github.com/joho/godotenv"
 
 	"github.com/blockchain-sdk-go/api/handler"
 	"github.com/blockchain-sdk-go/client"
@@ -17,14 +20,22 @@ import (
 // @host localhost:8080
 // @BasePath /api/v1
 func main() {
+	// 載入 .env
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, using system environment variables")
+	}
+
+	ethNodeURL := os.Getenv("ETH_NODE_URL")
+	tronNodeURL := os.Getenv("TRON_NODE_URL")
+
 	// Create Ethereum handler
-	ethHandler, err := handler.NewBlockchainHandler(client.Ethereum)
+	ethHandler, err := handler.NewBlockchainHandler(client.Ethereum, ethNodeURL)
 	if err != nil {
 		log.Fatalf("Failed to create Ethereum handler: %v", err)
 	}
 
 	// Create Tron handler
-	tronHandler, err := handler.NewBlockchainHandler(client.Tron)
+	tronHandler, err := handler.NewBlockchainHandler(client.Tron, tronNodeURL)
 	if err != nil {
 		log.Fatalf("Failed to create Tron handler: %v", err)
 	}

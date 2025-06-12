@@ -12,18 +12,20 @@ import (
 // BlockchainHandler 區塊鏈 API 處理器，負責處理 HTTP 請求
 // client：區塊鏈操作介面
 type BlockchainHandler struct {
-	client types.BlockchainClient
+	client  types.BlockchainClient
+	nodeURL string
 }
 
-// NewBlockchainHandler 建立新的區塊鏈 handler
+// NewBlockchainHandler 建立新的區塊鏈 handler，支援 nodeURL
 // blockchainType：區塊鏈類型
+// nodeURL：區塊鏈節點 URL
 // 回傳 BlockchainHandler 實例與錯誤
-func NewBlockchainHandler(blockchainType client.BlockchainType) (*BlockchainHandler, error) {
+func NewBlockchainHandler(blockchainType client.BlockchainType, nodeURL string) (*BlockchainHandler, error) {
 	c, err := client.NewBlockchainClient(blockchainType)
 	if err != nil {
 		return nil, err
 	}
-	return &BlockchainHandler{client: c}, nil
+	return &BlockchainHandler{client: c, nodeURL: nodeURL}, nil
 }
 
 // Connect 連接區塊鏈節點

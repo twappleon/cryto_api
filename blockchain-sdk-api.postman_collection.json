@@ -11,7 +11,7 @@
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
         "url": { "raw": "{{base_url}}/api/v1/eth/connect", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "connect"] },
-        "body": { "mode": "raw", "raw": "{\n  \"url\": \"{{node_url}}\"\n}" }
+        "body": { "mode": "raw", "raw": "{\n  \"url\": \"{{eth_node_url}}\"\n}" }
       }
     },
     {
@@ -55,7 +55,7 @@
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
         "url": { "raw": "{{base_url}}/api/v1/tron/connect", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "connect"] },
-        "body": { "mode": "raw", "raw": "{\n  \"url\": \"{{node_url}}\"\n}" }
+        "body": { "mode": "raw", "raw": "{\n  \"url\": \"{{tron_node_url}}\"\n}" }
       }
     },
     {
