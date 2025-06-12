@@ -29,12 +29,13 @@ func NewBlockchainHandler(blockchainType client.BlockchainType) (*BlockchainHand
 // Connect 連接區塊鏈節點
 // @Summary Connect to blockchain node
 // @Description Connect to a blockchain node using the provided URL
-// @Tags blockchain
+// @Tags ethereum, tron
 // @Accept json
 // @Produce json
 // @Param request body types.ConnectRequest true "Connection details"
 // @Success 200 {object} types.Response
-// @Router /connect [post]
+// @Router /api/v1/eth/connect [post]
+// @Router /api/v1/tron/connect [post]
 func (h *BlockchainHandler) Connect(c *gin.Context) {
 	var req types.ConnectRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -64,10 +65,11 @@ func (h *BlockchainHandler) Connect(c *gin.Context) {
 // GenerateWallet 產生新錢包
 // @Summary Generate new wallet
 // @Description Generate a new blockchain wallet
-// @Tags wallet
+// @Tags ethereum, tron
 // @Produce json
 // @Success 200 {object} types.Response{data=types.WalletResponse}
-// @Router /wallet/generate [post]
+// @Router /api/v1/eth/wallet/generate [post]
+// @Router /api/v1/tron/wallet/generate [post]
 func (h *BlockchainHandler) GenerateWallet(c *gin.Context) {
 	walletManager, ok := h.client.(types.WalletManager)
 	if !ok {
@@ -101,12 +103,13 @@ func (h *BlockchainHandler) GenerateWallet(c *gin.Context) {
 // GetBalance 查詢主鏈幣餘額
 // @Summary Get native token balance
 // @Description Get the balance of native tokens (ETH/TRX) for an address
-// @Tags balance
+// @Tags ethereum, tron
 // @Accept json
 // @Produce json
 // @Param request body types.BalanceRequest true "Balance query details"
 // @Success 200 {object} types.Response{data=types.BalanceResponse}
-// @Router /balance [post]
+// @Router /api/v1/eth/balance [post]
+// @Router /api/v1/tron/balance [post]
 func (h *BlockchainHandler) GetBalance(c *gin.Context) {
 	var req types.BalanceRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -151,12 +154,13 @@ func (h *BlockchainHandler) GetBalance(c *gin.Context) {
 // SendNativeToken 發送主鏈幣
 // @Summary Send native tokens
 // @Description Send native tokens (ETH/TRX) to an address
-// @Tags transfer
+// @Tags ethereum, tron
 // @Accept json
 // @Produce json
 // @Param request body types.TransferRequest true "Transfer details"
 // @Success 200 {object} types.Response{data=types.TransactionResponse}
-// @Router /transfer/native [post]
+// @Router /api/v1/eth/transfer/native [post]
+// @Router /api/v1/tron/transfer/native [post]
 func (h *BlockchainHandler) SendNativeToken(c *gin.Context) {
 	var req types.TransferRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -200,12 +204,13 @@ func (h *BlockchainHandler) SendNativeToken(c *gin.Context) {
 // DeployContract 部署智能合約
 // @Summary Deploy smart contract
 // @Description Deploy a new smart contract to the blockchain
-// @Tags contract
+// @Tags ethereum, tron
 // @Accept json
 // @Produce json
 // @Param request body types.ContractDeployRequest true "Contract deployment details"
 // @Success 200 {object} types.Response{data=types.ContractResponse}
-// @Router /contract/deploy [post]
+// @Router /api/v1/eth/contract/deploy [post]
+// @Router /api/v1/tron/contract/deploy [post]
 func (h *BlockchainHandler) DeployContract(c *gin.Context) {
 	var req types.ContractDeployRequest
 	if err := c.ShouldBindJSON(&req); err != nil {

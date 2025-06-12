@@ -5,6 +5,7 @@ import (
 
 	"github.com/blockchain-sdk-go/api/handler"
 	"github.com/blockchain-sdk-go/client"
+	_ "github.com/blockchain-sdk-go/cmd/api/docs" // 匿名 import，註冊 swagger 文件
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

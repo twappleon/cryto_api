@@ -1,0 +1,21 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API for interacting with Ethereum and Tron blockchains",
+        "title": "Blockchain SDK API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "../eth/connect": {
+            "post": {
+                "summary": "Connect to Ethereum node",
+                "description": "Connect to an Ethereum node",
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "body",
+    }
+}
