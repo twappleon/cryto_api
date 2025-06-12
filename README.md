@@ -10,56 +10,41 @@ go get github.com/blockchain-sdk-go
 
 ## Quick Start
 
-```go
-package main
+### 使用 Docker Compose 啟動服務
 
-import (
-	"context"
-	"log"
-	"math/big"
+1. 建置並啟動服務（在專案根目錄下執行）：
+   ```bash
+   docker-compose up --build
+   ```
+   此命令會啟動 Go API 服務（blockchain-api）與 Nginx 反向代理（blockchain-nginx），並將 Nginx 對外開放 80 端口。
 
-	"github.com/blockchain-sdk-go/client"
-	"github.com/blockchain-sdk-go/types"
-)
+2. 外部訪問 API 時，請使用 Nginx 反向代理的位址，例如：
+   - 產生新錢包：  
+     POST http://<your_host>/api/v1/eth/wallet/generate  
+     (或 /api/v1/tron/wallet/generate)
+   - 查詢餘額：  
+     POST http://<your_host>/api/v1/eth/balance  
+     (或 /api/v1/tron/balance)  
+     (請求體範例：{ "address": "0x..." })
+   - 發送主鏈幣：  
+     POST http://<your_host>/api/v1/eth/transfer/native  
+     (或 /api/v1/tron/transfer/native)  
+     (請求體範例：{ "from_private_key": "0x...", "to_address": "0x...", "amount": 0.1 })
+   - 部署合約：  
+     POST http://<your_host>/api/v1/eth/contract/deploy  
+     (或 /api/v1/tron/contract/deploy)  
+     (請求體範例：{ "bytecode": "0x...", "abi": "..." })
 
-func main() {
-	// Create a new Ethereum client
-	ethClient, err := client.NewBlockchainClient(client.Ethereum)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer ethClient.Close()
+3. Swagger 文件  
+   可透過 http://<your_host>/swagger/index.html 查看 API 文件與測試。
 
-	// Connect to an Ethereum node
-	ctx := context.Background()
-	err = ethClient.Connect(ctx, "https://mainnet.infura.io/v3/YOUR-PROJECT-ID")
-	if err != nil {
-		log.Fatal(err)
-	}
+### 注意事項
 
-	// Generate a new wallet
-	privateKey, address, err := ethClient.(types.WalletManager).GenerateNewWallet()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("Generated new wallet: %s", address)
+- 請確保 docker 與 docker-compose 已安裝，並在專案根目錄下執行 docker-compose 命令。
+- 若需自訂 Nginx 反向代理設定，請修改 deploy/nginx.conf 檔案。
+- 若需調整 Go API 服務的環境變數或參數，請在 docker-compose.yml 中設定。
 
-	// Get ETH balance
-	balance, err := ethClient.(types.TokenManager).GetNativeBalance(ctx, address)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("ETH Balance: %s", balance.String())
-
-	// Send ETH
-	amount := new(big.Float).SetFloat64(0.1)
-	txHash, err := ethClient.(types.TokenManager).SendNativeToken(ctx, privateKey, "0xRecipientAddress", amount)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("Transaction sent: %s", txHash)
-}
-```
+---
 
 ## Features
 
