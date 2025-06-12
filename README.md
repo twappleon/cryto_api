@@ -86,3 +86,49 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details. 
+
+## Swag init
+
+```bash
+swag init
+```
+
+# Swagger 文件產生與常見問題排查
+
+## 產生 Swagger 文件
+
+1. 安裝 swag CLI 工具：
+   ```bash
+   go install github.com/swaggo/swag/cmd/swag@latest
+   ```
+   > 安裝後請確認 `$GOPATH/bin` 或 `$HOME/go/bin` 已加入 PATH。
+
+2. 驗證安裝：
+   ```bash
+   swag --version
+   ```
+   > 若有顯示版本號，表示安裝成功。
+
+3. 回到專案根目錄（有 main.go 的地方），執行：
+   ```bash
+   swag init
+   ```
+   > 這會自動產生 `docs` 目錄與 swagger.json 文件。
+
+## 常見問題排查
+
+- 若執行 `swag init` 無法執行，請檢查：
+  1. 是否已安裝 swag CLI 並加入 PATH。
+  2. 專案根目錄是否有 main.go 並包含正確的 Swagger 註解（如 `@title`、`@version` 等）。
+  3. 專案是否為 Go module（有 go.mod 檔）。
+  4. 若有錯誤訊息，請參考終端機輸出內容進行修正。
+
+- 若 Swagger UI 顯示 `Failed to load API definition` 或 `Internal Server Error doc.json`，請檢查：
+  1. Gin 路由是否有註冊 `/swagger/*any` handler。
+  2. `docs/swagger.json` 是否存在。
+  3. Nginx 或 Docker 路由設定是否正確代理到 API 服務。
+  4. API 服務日誌有無 500 錯誤或找不到檔案的訊息。
+
+---
+
+如遇問題，請將錯誤訊息貼給開發者協助排查。 
