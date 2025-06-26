@@ -1,9 +1,360 @@
 basePath: /api/v1
+definitions:
+  types.BalanceRequest:
+    properties:
+      address:
+        description: 查詢地址
+        type: string
+    required:
+    - address
+    type: object
+  types.BalanceResponse:
+    properties:
+      address:
+        description: 查詢地址
+        type: string
+      balance:
+        description: 餘額
+        type: number
+    type: object
+  types.ConnectRequest:
+    properties:
+      url:
+        description: 節點 URL
+        type: string
+    required:
+    - url
+    type: object
+  types.ContractDeployRequest:
+    properties:
+      abi:
+        description: 合約 ABI
+        type: string
+      bytecode:
+        description: 合約 bytecode
+        type: string
+      constructor_args:
+        description: 建構子參數
+        items: {}
+        type: array
+      private_key:
+        description: 部署者私鑰
+        type: string
+    required:
+    - abi
+    - bytecode
+    - private_key
+    type: object
+  types.ContractResponse:
+    properties:
+      contract_address:
+        description: 合約地址
+        type: string
+      result:
+        description: 執行結果
+      tx_hash:
+        description: 交易雜湊
+        type: string
+    type: object
+  types.Response:
+    properties:
+      code:
+        description: 狀態碼
+        type: integer
+      data:
+        description: 回傳資料
+      message:
+        description: 訊息
+        type: string
+    type: object
+  types.TransactionResponse:
+    properties:
+      tx_hash:
+        description: 交易雜湊
+        type: string
+    type: object
+  types.TransferRequest:
+    properties:
+      amount:
+        description: 轉帳金額
+        type: number
+      from_private_key:
+        description: 發送方私鑰
+        type: string
+      to_address:
+        description: 接收方地址
+        type: string
+    required:
+    - amount
+    - from_private_key
+    - to_address
+    type: object
+  types.WalletResponse:
+    properties:
+      address:
+        description: 錢包地址
+        type: string
+      private_key:
+        description: 私鑰
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact: {}
   description: API for interacting with Ethereum and Tron blockchains
   title: Blockchain SDK API
   version: "1.0"
-paths: {}
+paths:
+  /api/v1/eth/balance:
+    post:
+      consumes:
+      - application/json
+      description: Get the balance of native tokens (ETH/TRX) for an address
+      parameters:
+      - description: Balance query details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.BalanceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.BalanceResponse'
+              type: object
+      summary: Get native token balance
+      tags:
+      - ethereum
+      - tron
+  /api/v1/eth/connect:
+    post:
+      consumes:
+      - application/json
+      description: Connect to a blockchain node using the provided URL
+      parameters:
+      - description: Connection details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.ConnectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.Response'
+      summary: Connect to blockchain node
+      tags:
+      - ethereum
+      - tron
+  /api/v1/eth/contract/deploy:
+    post:
+      consumes:
+      - application/json
+      description: Deploy a new smart contract to the blockchain
+      parameters:
+      - description: Contract deployment details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.ContractDeployRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.ContractResponse'
+              type: object
+      summary: Deploy smart contract
+      tags:
+      - ethereum
+      - tron
+  /api/v1/eth/transfer/native:
+    post:
+      consumes:
+      - application/json
+      description: Send native tokens (ETH/TRX) to an address
+      parameters:
+      - description: Transfer details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.TransferRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.TransactionResponse'
+              type: object
+      summary: Send native tokens
+      tags:
+      - ethereum
+      - tron
+  /api/v1/eth/wallet/generate:
+    post:
+      description: Generate a new blockchain wallet
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.WalletResponse'
+              type: object
+      summary: Generate new wallet
+      tags:
+      - ethereum
+      - tron
+  /api/v1/tron/balance:
+    post:
+      consumes:
+      - application/json
+      description: Get the balance of native tokens (ETH/TRX) for an address
+      parameters:
+      - description: Balance query details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.BalanceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.BalanceResponse'
+              type: object
+      summary: Get native token balance
+      tags:
+      - ethereum
+      - tron
+  /api/v1/tron/connect:
+    post:
+      consumes:
+      - application/json
+      description: Connect to a blockchain node using the provided URL
+      parameters:
+      - description: Connection details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.ConnectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.Response'
+      summary: Connect to blockchain node
+      tags:
+      - ethereum
+      - tron
+  /api/v1/tron/contract/deploy:
+    post:
+      consumes:
+      - application/json
+      description: Deploy a new smart contract to the blockchain
+      parameters:
+      - description: Contract deployment details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.ContractDeployRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.ContractResponse'
+              type: object
+      summary: Deploy smart contract
+      tags:
+      - ethereum
+      - tron
+  /api/v1/tron/transfer/native:
+    post:
+      consumes:
+      - application/json
+      description: Send native tokens (ETH/TRX) to an address
+      parameters:
+      - description: Transfer details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.TransferRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.TransactionResponse'
+              type: object
+      summary: Send native tokens
+      tags:
+      - ethereum
+      - tron
+  /api/v1/tron/wallet/generate:
+    post:
+      description: Generate a new blockchain wallet
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/types.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/types.WalletResponse'
+              type: object
+      summary: Generate new wallet
+      tags:
+      - ethereum
+      - tron
 swagger: "2.0"

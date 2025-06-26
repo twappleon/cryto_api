@@ -131,4 +131,33 @@ swag init
 
 ---
 
-如遇問題，請將錯誤訊息貼給開發者協助排查。 
+如遇問題，請將錯誤訊息貼給開發者協助排查。
+
+---
+
+## Swagger API 無法顯示接口時的排查與修復
+
+如果你遇到 Swagger UI 顯示 `No operations defined in spec!` 或接口列表為空，請依照以下步驟排查：
+
+### 1. 確認目錄結構
+- 入口文件 `main.go` 位於 `cmd/api/main.go`
+- handler 實現與註解位於 `api/handler/`
+
+### 2. 正確執行 swag init 命令
+請務必在**專案根目錄**下執行：
+```bash
+swag init --generalInfo cmd/api/main.go --output cmd/api/docs --dir api,cmd/api
+```
+- `--generalInfo` 指定入口 main.go 的正確路徑
+- `--output` 指定 swagger 文件輸出目錄
+- `--dir` 指定要掃描註解的多個目錄（用逗號分隔，無空格）
+
+### 3. 常見錯誤與解法
+- **路徑重複**：如果出現 `cannot parse source files .../cmd/api/cmd/api/main.go: no such file or directory`，說明路徑寫重複了，請確認只寫一次 `cmd/api`。
+- **無 Go 檔案警告**：`no Go files in .../api` 只要 `api/handler` 有 Go 檔案即可，這個警告可忽略。
+- **必須在根目錄執行**：建議始終在專案根目錄下執行 swag 命令，避免路徑混亂。
+
+### 4. 生成後重啟服務
+swag 生成文件後，請重啟 API 服務並刷新 Swagger UI 頁面。
+
+--- 
