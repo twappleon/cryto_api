@@ -13,6 +13,8 @@ import (
 	"github.com/fbsobreira/gotron-sdk/pkg/client"
 	"github.com/fbsobreira/gotron-sdk/pkg/proto/core"
 	"github.com/golang/protobuf/proto"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 // TronClient 實作 BlockchainClient, WalletManager, TokenManager, ContractManager
@@ -30,7 +32,7 @@ var _ types.ContractManager = (*TronClient)(nil)
 // Connect 實作 BlockchainClient 介面
 func (t *TronClient) Connect(ctx context.Context, url string) error {
 	cli := client.NewGrpcClient(url)
-	err := cli.Start()
+	err := cli.Start(grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return err
 	}
