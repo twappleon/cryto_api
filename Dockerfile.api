@@ -1,9 +1,10 @@
-FROM golang:1.24 AS builder
+FROM golang:1.24-alpine AS builder
 WORKDIR /app
 COPY . .
-RUN apt-get update && apt-get install -y git
+RUN apk add --no-cache git
 RUN go mod download
 RUN cd cmd/api && go build -o /app/api-server main.go
+RUN ls -l /app/api-server
 
 FROM alpine:latest
 WORKDIR /app
