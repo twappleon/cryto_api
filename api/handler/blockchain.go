@@ -36,8 +36,8 @@ func NewBlockchainHandler(blockchainType client.BlockchainType, nodeURL string) 
 // @Produce json
 // @Param request body types.ConnectRequest true "Connection details"
 // @Success 200 {object} types.Response
-// @Router /api/v1/eth/connect [post]
-// @Router /api/v1/tron/connect [post]
+// @Router /eth/connect [post]
+// @Router /tron/connect [post]
 func (h *BlockchainHandler) Connect(c *gin.Context) {
 	var req types.ConnectRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -70,8 +70,8 @@ func (h *BlockchainHandler) Connect(c *gin.Context) {
 // @Tags ethereum, tron
 // @Produce json
 // @Success 200 {object} types.Response{data=types.WalletResponse}
-// @Router /api/v1/eth/wallet/generate [post]
-// @Router /api/v1/tron/wallet/generate [post]
+// @Router /eth/wallet/generate [post]
+// @Router /tron/wallet/generate [post]
 func (h *BlockchainHandler) GenerateWallet(c *gin.Context) {
 	walletManager, ok := h.client.(types.WalletManager)
 	if !ok {
@@ -110,8 +110,8 @@ func (h *BlockchainHandler) GenerateWallet(c *gin.Context) {
 // @Produce json
 // @Param request body types.BalanceRequest true "Balance query details"
 // @Success 200 {object} types.Response{data=types.BalanceResponse}
-// @Router /api/v1/eth/balance [post]
-// @Router /api/v1/tron/balance [post]
+// @Router /eth/balance [post]
+// @Router /tron/balance [post]
 func (h *BlockchainHandler) GetBalance(c *gin.Context) {
 	var req types.BalanceRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -161,8 +161,8 @@ func (h *BlockchainHandler) GetBalance(c *gin.Context) {
 // @Produce json
 // @Param request body types.TransferRequest true "Transfer details"
 // @Success 200 {object} types.Response{data=types.TransactionResponse}
-// @Router /api/v1/eth/transfer/native [post]
-// @Router /api/v1/tron/transfer/native [post]
+// @Router /eth/transfer/native [post]
+// @Router /tron/transfer/native [post]
 func (h *BlockchainHandler) SendNativeToken(c *gin.Context) {
 	var req types.TransferRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -211,8 +211,8 @@ func (h *BlockchainHandler) SendNativeToken(c *gin.Context) {
 // @Produce json
 // @Param request body types.ContractDeployRequest true "Contract deployment details"
 // @Success 200 {object} types.Response{data=types.ContractResponse}
-// @Router /api/v1/eth/contract/deploy [post]
-// @Router /api/v1/tron/contract/deploy [post]
+// @Router /eth/contract/deploy [post]
+// @Router /tron/contract/deploy [post]
 func (h *BlockchainHandler) DeployContract(c *gin.Context) {
 	var req types.ContractDeployRequest
 	if err := c.ShouldBindJSON(&req); err != nil {

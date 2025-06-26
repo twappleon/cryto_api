@@ -17,7 +17,7 @@ import (
 // @title Blockchain SDK API
 // @version 1.0
 // @description API for interacting with Ethereum and Tron blockchains
-// @host localhost:8080
+// @host localhost:80
 // @BasePath /api/v1
 func main() {
 	// 載入 .env

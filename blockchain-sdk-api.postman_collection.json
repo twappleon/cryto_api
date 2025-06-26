@@ -10,7 +10,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/eth/connect", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "connect"] },
+        "url": { "raw": "{{base_url}}/eth/connect", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "connect"] },
         "body": { "mode": "raw", "raw": "{\n  \"url\": \"{{eth_node_url}}\"\n}" }
       }
     },
@@ -19,7 +19,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/eth/wallet/generate", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "wallet", "generate"] }
+        "url": { "raw": "{{base_url}}/eth/wallet/generate", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "wallet", "generate"] }
       }
     },
     {
@@ -27,7 +27,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/eth/balance", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "balance"] },
+        "url": { "raw": "{{base_url}}/eth/balance", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "balance"] },
         "body": { "mode": "raw", "raw": "{\n  \"address\": \"<ADDRESS>\"\n}" }
       }
     },
@@ -36,7 +36,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/eth/transfer/native", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "transfer", "native"] },
+        "url": { "raw": "{{base_url}}/eth/transfer/native", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "transfer", "native"] },
         "body": { "mode": "raw", "raw": "{\n  \"from_private_key\": \"<PRIVATE_KEY>\",\n  \"to_address\": \"<TO_ADDRESS>\",\n  \"amount\": 0.01\n}" }
       }
     },
@@ -45,7 +45,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/eth/contract/deploy", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "contract", "deploy"] },
+        "url": { "raw": "{{base_url}}/eth/contract/deploy", "host": ["{{base_url}}"], "path": ["api", "v1", "eth", "contract", "deploy"] },
         "body": { "mode": "raw", "raw": "{\n  \"private_key\": \"<PRIVATE_KEY>\",\n  \"bytecode\": \"<BYTECODE>\",\n  \"abi\": \"<ABI>\",\n  \"constructor_args\": []\n}" }
       }
     },
@@ -54,7 +54,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/tron/connect", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "connect"] },
+        "url": { "raw": "{{base_url}}/tron/connect", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "connect"] },
         "body": { "mode": "raw", "raw": "{\n  \"url\": \"{{tron_node_url}}\"\n}" }
       }
     },
@@ -63,7 +63,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/tron/wallet/generate", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "wallet", "generate"] }
+        "url": { "raw": "{{base_url}}/tron/wallet/generate", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "wallet", "generate"] }
       }
     },
     {
@@ -71,7 +71,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/tron/balance", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "balance"] },
+        "url": { "raw": "{{base_url}}/tron/balance", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "balance"] },
         "body": { "mode": "raw", "raw": "{\n  \"address\": \"<ADDRESS>\"\n}" }
       }
     },
@@ -80,7 +80,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/tron/transfer/native", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "transfer", "native"] },
+        "url": { "raw": "{{base_url}}/tron/transfer/native", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "transfer", "native"] },
         "body": { "mode": "raw", "raw": "{\n  \"from_private_key\": \"<PRIVATE_KEY>\",\n  \"to_address\": \"<TO_ADDRESS>\",\n  \"amount\": 0.01\n}" }
       }
     },
@@ -89,7 +89,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": { "raw": "{{base_url}}/api/v1/tron/contract/deploy", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "contract", "deploy"] },
+        "url": { "raw": "{{base_url}}/tron/contract/deploy", "host": ["{{base_url}}"], "path": ["api", "v1", "tron", "contract", "deploy"] },
         "body": { "mode": "raw", "raw": "{\n  \"private_key\": \"<PRIVATE_KEY>\",\n  \"bytecode\": \"<BYTECODE>\",\n  \"abi\": \"<ABI>\",\n  \"constructor_args\": []\n}" }
       }
     }

@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/eth/balance": {
+        "/eth/balance": {
             "post": {
                 "description": "Get the balance of native tokens (ETH/TRX) for an address",
                 "consumes": [
@@ -62,7 +62,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/eth/connect": {
+        "/eth/connect": {
             "post": {
                 "description": "Connect to a blockchain node using the provided URL",
                 "consumes": [
@@ -97,7 +97,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/eth/contract/deploy": {
+        "/eth/contract/deploy": {
             "post": {
                 "description": "Deploy a new smart contract to the blockchain",
                 "consumes": [
@@ -144,7 +144,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/eth/transfer/native": {
+        "/eth/transfer/native": {
             "post": {
                 "description": "Send native tokens (ETH/TRX) to an address",
                 "consumes": [
@@ -191,7 +191,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/eth/wallet/generate": {
+        "/eth/wallet/generate": {
             "post": {
                 "description": "Generate a new blockchain wallet",
                 "produces": [
@@ -224,7 +224,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tron/balance": {
+        "/tron/balance": {
             "post": {
                 "description": "Get the balance of native tokens (ETH/TRX) for an address",
                 "consumes": [
@@ -271,7 +271,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tron/connect": {
+        "/tron/connect": {
             "post": {
                 "description": "Connect to a blockchain node using the provided URL",
                 "consumes": [
@@ -306,7 +306,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tron/contract/deploy": {
+        "/tron/contract/deploy": {
             "post": {
                 "description": "Deploy a new smart contract to the blockchain",
                 "consumes": [
@@ -353,7 +353,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tron/transfer/native": {
+        "/tron/transfer/native": {
             "post": {
                 "description": "Send native tokens (ETH/TRX) to an address",
                 "consumes": [
@@ -400,7 +400,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tron/wallet/generate": {
+        "/tron/wallet/generate": {
             "post": {
                 "description": "Generate a new blockchain wallet",
                 "produces": [
@@ -581,7 +581,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "localhost",
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "Blockchain SDK API",
