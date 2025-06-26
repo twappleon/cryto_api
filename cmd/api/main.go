@@ -33,11 +33,25 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create Ethereum handler: %v", err)
 	}
+	// 自动连接以太坊节点
+	if ethNodeURL != "" {
+		log.Println("Auto-connecting Ethereum node:", ethNodeURL)
+		if err := ethHandler.ConnectByURL(ethNodeURL); err != nil {
+			log.Fatalf("Failed to auto-connect Ethereum node: %v", err)
+		}
+	}
 
 	// Create Tron handler
 	tronHandler, err := handler.NewBlockchainHandler(client.Tron, tronNodeURL)
 	if err != nil {
 		log.Fatalf("Failed to create Tron handler: %v", err)
+	}
+	// 自动连接波场节点
+	if tronNodeURL != "" {
+		log.Println("Auto-connecting Tron node:", tronNodeURL)
+		if err := tronHandler.ConnectByURL(tronNodeURL); err != nil {
+			log.Fatalf("Failed to auto-connect Tron node: %v", err)
+		}
 	}
 
 	// Initialize Gin router

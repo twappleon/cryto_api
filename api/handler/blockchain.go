@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"math/big"
 	"net/http"
 
@@ -256,4 +257,9 @@ func (h *BlockchainHandler) DeployContract(c *gin.Context) {
 			ContractAddress: contractAddress,
 		},
 	})
+}
+
+// ConnectByURL 供服务端自动连接节点
+func (h *BlockchainHandler) ConnectByURL(url string) error {
+	return h.client.Connect(context.Background(), url)
 }
