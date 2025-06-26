@@ -1,7 +1,7 @@
 package client
 
 import (
-	"github.com/blockchain-sdk-go/types"
+	"github.com/blockchain-sdk-go/api/types"
 )
 
 // BlockchainType 區塊鏈類型字串定義
@@ -26,14 +26,12 @@ func NewBlockchainClient(blockchainType BlockchainType) (types.BlockchainClient,
 	}
 }
 
-// NewEthereumClient 建立以太坊 client（待實作）
-func NewEthereumClient() (types.EthereumClient, error) {
-	// Implementation will be in eth/client.go
-	return nil, nil
+// NewEthereumClient 建立以太坊 client
+func NewEthereumClient() (types.BlockchainClient, error) {
+	return &EthereumClient{}, nil
 }
 
-// NewTronClient 建立波場 client（待實作）
-func NewTronClient() (types.TronClient, error) {
-	// Implementation will be in tron/client.go
-	return nil, nil
+// NewTronClient 建立波場 client
+func NewTronClient() (types.BlockchainClient, error) {
+	return &TronClient{}, nil
 }

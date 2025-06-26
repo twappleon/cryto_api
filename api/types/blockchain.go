@@ -9,6 +9,8 @@ import (
 type BlockchainClient interface {
 	// Connect 連接到區塊鏈節點
 	Connect(ctx context.Context, url string) error
+	// Close 釋放資源
+	Close() error
 }
 
 // WalletManager 定義錢包管理相關操作
