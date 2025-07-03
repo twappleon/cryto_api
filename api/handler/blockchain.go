@@ -263,3 +263,8 @@ func (h *BlockchainHandler) DeployContract(c *gin.Context) {
 func (h *BlockchainHandler) ConnectByURL(url string) error {
 	return h.client.Connect(context.Background(), url)
 }
+
+// Close 关闭区块链连接
+func (h *BlockchainHandler) Close() {
+	h.client.Close()
+}

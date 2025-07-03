@@ -12,8 +12,13 @@ services:
     restart: always
     expose:
       - 8080
+    environment:
+      - LOKI_URL=http://loki:3100
+      - LOG_LEVEL=info
     networks:
       - blockchain_net
+    depends_on:
+      - loki
 
   nginx:
     image: nginx:alpine
@@ -28,6 +33,49 @@ services:
     networks:
       - blockchain_net
 
+  loki:
+    image: grafana/loki:2.9.0
+    container_name: blockchain-loki
+    restart: always
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./deploy/loki-config.yaml:/etc/loki/local-config.yaml:ro
+    networks:
+      - blockchain_net
+
+  promtail:
+    image: grafana/promtail:2.9.0
+    container_name: blockchain-promtail
+    restart: always
+    volumes:
+      - /var/log:/var/log
+      - ./deploy/promtail-config.yaml:/etc/promtail/config.yml:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - blockchain_net
+    depends_on:
+      - loki
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: blockchain-grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - blockchain_net
+    depends_on:
+      - loki
+
 networks:
   blockchain_net:
-    driver: bridge 
+    driver: bridge
+
+volumes:
+  grafana-storage: 

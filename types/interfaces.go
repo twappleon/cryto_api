@@ -68,3 +68,17 @@ type TronClient interface {
 	// BroadcastSignedTransaction 廣播已簽名交易
 	BroadcastSignedTransaction(ctx context.Context, txData []byte) (txHash string, err error)
 }
+
+// Logger 接口定义日志功能
+type Logger interface {
+	Info(args ...interface{})
+	Infof(format string, args ...interface{})
+	Error(args ...interface{})
+	Errorf(format string, args ...interface{})
+	Warn(args ...interface{})
+	Warnf(format string, args ...interface{})
+	Debug(args ...interface{})
+	Debugf(format string, args ...interface{})
+	WithField(key string, value interface{}) Logger
+	WithFields(fields map[string]interface{}) Logger
+}
