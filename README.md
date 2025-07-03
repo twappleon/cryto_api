@@ -160,4 +160,31 @@ swag init --generalInfo cmd/api/main.go --output cmd/api/docs --dir api,cmd/api
 ### 4. 生成後重啟服務
 swag 生成文件後，請重啟 API 服務並刷新 Swagger UI 頁面。
 
---- 
+---
+
+## 项目结构
+```
+/Users/leon.liu/Documents/workspace_cryto_api/
+├── api/
+│   ├── handler/
+│   │   └── blockchain.go
+├── client/
+│   ├── ethereum.go
+│   ├── factory.go
+│   ├── factory_test.go
+│   ├── tron.go
+│   ├── tron_test.go
+├── cmd/
+│   ├── api/
+│   │   ├── main.go
+│   │   └── docs/  # Swagger 文档生成目录
+├── deploy/
+│   └── nginx.conf
+├── .env
+├── docker-compose.yml
+├── Dockerfile
+├── Dockerfile.api
+├── README.md
+└── types/
+    └── interfaces.go
+```
